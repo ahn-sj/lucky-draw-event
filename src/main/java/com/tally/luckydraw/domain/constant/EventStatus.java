@@ -1,4 +1,4 @@
-package com.tally.luckydraw.domain;
+package com.tally.luckydraw.domain.constant;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
