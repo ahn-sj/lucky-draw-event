@@ -14,7 +14,7 @@ public class EventProduct {
     private final String eventProductName;
     private final int maxQuantity;
     private final int currentQuantity;
-    private final int rank;
+    private final int rank; // TODO: JSON으로 담을까? -> {0:50,1:5,2:15,3:30} -> 0 = 꽝, 1 = 1등, 2 = 2등, 3 = 3등
     private final double probability;
     private final ProductStatus productStatus;
     private final LocalDateTime createdAt;

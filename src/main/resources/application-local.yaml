@@ -7,6 +7,12 @@ spring:
     username: root
     password: tally
     driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
 
 logging:
   level:

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class EventParticipateServiceImpl implements EventParticipateService {
+public class EventParticipateUseCase implements EventParticipateService {
 
     @Override
     public void participate(final String eventId, final String userId) {
