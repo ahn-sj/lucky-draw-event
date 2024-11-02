@@ -1,5 +1,6 @@
-package com.tally.luckydraw.application;
+package com.tally.luckydraw.application.impl;
 
+import com.tally.luckydraw.application.EventParticipateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

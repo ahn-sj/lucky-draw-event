@@ -1,4 +1,4 @@
-package com.tally.luckydraw.application;
+package com.tally.luckydraw.application.impl;
 
 import com.tally.luckydraw.domain.repository.EventCommandRepository;
 import com.tally.luckydraw.domain.repository.EventQueryRepository;
