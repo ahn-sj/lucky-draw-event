@@ -1,11 +1,7 @@
 package com.tally.luckydraw.domain.entity;
 
-import com.tally.luckydraw.global.converter.RankProbabilityConverter;
-import com.tally.luckydraw.global.domain.vo.RankProbability;
 import jakarta.persistence.*;
 import lombok.Getter;
-
-import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -30,12 +26,5 @@ public class EventProductEntity {
 
     @Column(name = "MAX_QUANTITY", nullable = false)
     private int maxQuantity;
-
-    @Convert(converter = RankProbabilityConverter.class)
-    @Column(name = "RANK_PROBABILITIES", columnDefinition = "JSON")
-    private List<RankProbability> rankProbabilities;
-
-    @Column(name = "PROBABILITY")
-    private double probability;
 
 }

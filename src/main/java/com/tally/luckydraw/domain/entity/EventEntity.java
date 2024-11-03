@@ -2,10 +2,14 @@ package com.tally.luckydraw.domain.entity;
 
 import com.tally.luckydraw.domain.constant.EventStatus;
 import com.tally.luckydraw.domain.constant.EventType;
+import com.tally.luckydraw.global.converter.RankProbabilityConverter;
 import com.tally.luckydraw.global.domain.base.BaseTimeEntity;
 import com.tally.luckydraw.global.domain.period.DateTimePeriod;
+import com.tally.luckydraw.global.domain.vo.RankProbability;
 import jakarta.persistence.*;
 import lombok.Getter;
+
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -34,5 +38,9 @@ public class EventEntity extends BaseTimeEntity {
     //  ex) 주 단위 반복, 월/수/금, 주말만 등
     @Embedded
     private DateTimePeriod eventPeriod;
+
+    @Convert(converter = RankProbabilityConverter.class)
+    @Column(name = "RANK_PROBABILITIES", columnDefinition = "JSON")
+    private List<RankProbability> rankProbabilities;
 
 }
