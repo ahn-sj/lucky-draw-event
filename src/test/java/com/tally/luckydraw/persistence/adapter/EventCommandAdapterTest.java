@@ -2,11 +2,9 @@ package com.tally.luckydraw.persistence.adapter;
 
 import com.tally.luckydraw.domain.Event;
 import com.tally.luckydraw.domain.User;
-import com.tally.luckydraw.domain.entity.EventEntity;
 import com.tally.luckydraw.domain.entity.EventProductStockEntity;
 import com.tally.luckydraw.global.domain.vo.RankProbability;
 import com.tally.luckydraw.persistence.EventProductStockJpaRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +19,6 @@ public class EventCommandAdapterTest {
 
     @Autowired
     private EventCommandAdapter eventCommandAdapter;
-
-    @Autowired
-    private EventQueryAdapter eventQueryAdapter;
 
     @Autowired
     private EventProductStockJpaRepository eventProductStockJpaRepository;
