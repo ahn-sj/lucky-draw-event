@@ -1,5 +1,6 @@
 package com.tally.luckydraw.domain.entity;
 
+import com.tally.luckydraw.global.domain.base.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -8,7 +9,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Getter
 @Table(name = "EVENT_PRODUCTS")
-public class EventProductEntity {
+public class EventProductEntity extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

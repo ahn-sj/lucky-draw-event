@@ -24,10 +24,7 @@ public class RankProbabilityConverter implements AttributeConverter<List<RankPro
             if (rankProbabilities == null || rankProbabilities.isEmpty()) {
                 return null;
             }
-
-            validateProbabilitySum(rankProbabilities);
             return objectMapper.writeValueAsString(rankProbabilities);
-
         } catch (Exception e) {
             throw new IllegalStateException("Failed to convert RankProbability list to JSON", e);
         }
@@ -40,24 +37,9 @@ public class RankProbabilityConverter implements AttributeConverter<List<RankPro
                 return Collections.emptyList();
             }
 
-            List<RankProbability> rankProbabilities = objectMapper.readValue(dbData,
-                    new TypeReference<List<RankProbability>>() {});
-
-            validateProbabilitySum(rankProbabilities);
-            return rankProbabilities;
-
+            return objectMapper.readValue(dbData, new TypeReference<>() {});
         } catch (Exception e) {
             throw new IllegalStateException("Failed to convert JSON to RankProbability list", e);
-        }
-    }
-
-    private void validateProbabilitySum(List<RankProbability> rankProbabilities) {
-        double sum = rankProbabilities.stream()
-                .mapToDouble(rp -> rp.getProbability().getValue())
-                .sum();
-
-        if (Math.abs(sum - 100.0) > 0.01) {  // 부동소수점 오차 고려
-            throw new IllegalArgumentException("Total probability must be 100%");
         }
     }
 
