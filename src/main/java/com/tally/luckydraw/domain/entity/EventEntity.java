@@ -9,7 +9,6 @@ import com.tally.luckydraw.global.domain.period.DateTimePeriod;
 import com.tally.luckydraw.global.domain.vo.RankProbability;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -63,4 +62,5 @@ public class EventEntity extends BaseTimeEntity {
     public void soleOut(final List<RankProbability> rankProbabilities) {
         this.rankProbabilities = rankProbabilities;
     }
+
 }

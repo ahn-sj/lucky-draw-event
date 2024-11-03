@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class RankProbability {
     private final int rank;
-    private final double probability;
+    private double probability;
     private final Long eventProductId;
 
     @JsonCreator  // Jackson 역직렬화를 위한 생성자
@@ -25,11 +25,19 @@ public class RankProbability {
         return new RankProbability(rank, probability, eventProductId);
     }
 
-    public RankProbability soldOut() {
-        return new RankProbability(this.rank, 0, this.eventProductId);
+    // TODO: 불변하게 수정
+    public void soldOut() {
+        this.probability = 0.0;
     }
 
+    /**
+     * TODO: flip 하면 NPE 발생하는데 그거 확인
+     */
     public boolean isMatch(final Long eventProductId) {
         return eventProductId.equals(this.eventProductId);
+    }
+
+    public RankProbability with(final double probability) {
+        return new RankProbability(rank, probability, eventProductId);
     }
 }

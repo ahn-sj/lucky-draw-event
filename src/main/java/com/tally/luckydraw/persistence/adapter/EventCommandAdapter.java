@@ -59,23 +59,29 @@ public class EventCommandAdapter implements EventCommandRepository {
             log.info("상품 판매 종료: {}", stock.getEventProduct().getId());
             updateRankProbability(event, rank);
         }
-
     }
 
     private void updateRankProbability(final Event event, final int rank) {
-        try {
-            // 상품 판매 종료 상태로 변경
-            final EventEntity eventEntity = eventJpaRepository.findById(event.getEventId())
-                    .orElseThrow(() -> new RuntimeException("Event not found"));
+        final EventEntity eventEntity = eventJpaRepository.findById(event.getEventId())
+                .orElseThrow(() -> new RuntimeException("Event not found"));
 
-            final Long eventProductId = event.getWinningProductId(rank);
-
-            final List<RankProbability> rankProbabilities = event.setOutOfStock(eventProductId);
-            eventEntity.soleOut(eventProductId, rankProbabilities);
-
-            eventJpaRepository.save(eventEntity); // 확률 업데이트된 event 저장
-        } catch (Exception e) {
-            throw new IllegalStateException("rank_probabilities 업데이트 실패", e);
+        final List<RankProbability> probabilities = event.getRankProbabilities();
+        for (RankProbability probability : probabilities) {
+            final Long productId = event.getWinningProductId(rank);
+            if (probability.isMatch(productId)) {
+                probability.soldOut();
+            }
         }
+
+        /**
+         * 아래 코드는 동시성 문제가 발생하는데 지금 적용되어 있는 코드는 발생 안함....?
+         *
+         * final List<RankProbability> probabilities = event.getRankProbabilities().stream()
+         *         .map(probability -> probability.getRank() == rank ? probability.with(0.0) : probability)
+         *         .collect(Collectors.toList());
+         */
+        eventEntity.soleOut(probabilities);
+        eventJpaRepository.save(eventEntity);
     }
+
 }
