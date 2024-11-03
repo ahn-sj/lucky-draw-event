@@ -14,6 +14,7 @@ public class LuckyDrawPicker {
     public int pick(List<RankProbability> rankProbabilities) {
         // 전체 확률의 합을 계산
         final double totalProbability = rankProbabilities.stream()
+                .filter(rankProbability -> rankProbability.getProbability() > 0)
                 .mapToDouble(RankProbability::getProbability)
                 .sum();
 

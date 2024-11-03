@@ -15,6 +15,6 @@ public interface EventProductStockJpaRepository extends JpaRepository<EventProdu
     @Query("SELECT eps FROM EventProductStockEntity eps JOIN FETCH eps.eventProduct ep WHERE ep.eventId = :eventId")
     List<EventProductStockEntity> findByEventId(Long eventId);
 
-    @Query("SELECT eps FROM EventProductStockEntity eps JOIN FETCH eps.eventProduct ep WHERE ep.productId = :productId")
+    @Query("SELECT eps FROM EventProductStockEntity eps JOIN FETCH eps.eventProduct ep WHERE ep.id = :productId")
     Optional<EventProductStockEntity> findByProductId(Long productId);
 }

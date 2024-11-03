@@ -24,4 +24,12 @@ public class RankProbability {
     public static RankProbability of(final int rank, final double probability, final Long eventProductId) {
         return new RankProbability(rank, probability, eventProductId);
     }
+
+    public RankProbability soldOut() {
+        return new RankProbability(this.rank, 0, this.eventProductId);
+    }
+
+    public boolean isMatch(final Long eventProductId) {
+        return eventProductId.equals(this.eventProductId);
+    }
 }

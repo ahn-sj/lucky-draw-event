@@ -28,7 +28,7 @@ public class EventProductStockEntity extends BaseTimeEntity {
     private int currentQuantity;
 
     public boolean isSufficient() {
-        return currentQuantity <= eventProduct.getMaxQuantity();
+        return currentQuantity < eventProduct.getMaxQuantity();
     }
 
     public void increase() {

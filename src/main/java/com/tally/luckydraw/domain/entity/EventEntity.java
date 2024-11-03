@@ -9,6 +9,7 @@ import com.tally.luckydraw.global.domain.period.DateTimePeriod;
 import com.tally.luckydraw.global.domain.vo.RankProbability;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -44,8 +45,22 @@ public class EventEntity extends BaseTimeEntity {
     @Column(name = "RANK_PROBABILITIES", columnDefinition = "JSON")
     private List<RankProbability> rankProbabilities;
 
+    protected EventEntity() {}
+
+    public EventEntity(final Long id, final String name, final EventType type, final EventStatus status, final DateTimePeriod eventPeriod, final List<RankProbability> rankProbabilities) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.status = status;
+        this.eventPeriod = eventPeriod;
+        this.rankProbabilities = rankProbabilities;
+    }
+
     public Event toDomain() {
         return new Event(id, name, type, status, eventPeriod, rankProbabilities, this.getCreatedAt(), this.getUpdatedAt());
     }
 
+    public void soleOut(final List<RankProbability> rankProbabilities) {
+        this.rankProbabilities = rankProbabilities;
+    }
 }
