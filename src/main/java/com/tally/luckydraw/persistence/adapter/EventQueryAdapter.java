@@ -1,4 +1,4 @@
-package com.tally.luckydraw.application.adapter;
+package com.tally.luckydraw.persistence.adapter;
 
 import com.tally.luckydraw.domain.Event;
 import com.tally.luckydraw.domain.repository.EventQueryRepository;

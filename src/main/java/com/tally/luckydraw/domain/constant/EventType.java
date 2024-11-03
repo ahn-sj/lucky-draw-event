@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum EventType {
 
-    LUCKY_DRAW("추첨");
+    LUCKY_DRAW("추첨"),
+    ATTENDANCE("출석");
 
     private final String description;
 

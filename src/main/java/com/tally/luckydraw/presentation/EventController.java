@@ -13,7 +13,7 @@ public class EventController {
 
     private final EventServiceUseCase eventService;
 
-    @GetMapping("/event/{eventId}")
+    @GetMapping("/events/{eventId}")
     public EventQuery.EventDetailedQuery getEvent(final @PathVariable Long eventId) {
         return eventService.getEvent(eventId);
     }

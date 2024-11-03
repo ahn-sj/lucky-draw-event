@@ -1,4 +1,4 @@
-package com.tally.luckydraw.application.adapter;
+package com.tally.luckydraw.persistence.adapter;
 
 import com.tally.luckydraw.domain.EventProduct;
 import com.tally.luckydraw.domain.entity.EventProductEntity;
@@ -23,11 +23,10 @@ public class EventProductQueryAdapter implements EventProductQueryRepository {
     public List<EventProduct> getByEventId(Long eventId) {
         final List<EventProductEntity> eventProducts = eventProductJpaRepository.findByEventId(eventId);
 
-        final List<Long> ids = eventProducts.stream()
+        final List<Long> eventProductIds = eventProducts.stream()
                 .map(EventProductEntity::getId)
                 .toList();
-
-        final List<EventProductStockEntity> productStocks = eventProductStockJpaRepository.findByIds(ids);
+        final List<EventProductStockEntity> productStocks = eventProductStockJpaRepository.findByIds(eventProductIds);
 
         return EventProduct.of(eventProducts, productStocks);
     }

@@ -1,5 +1,6 @@
 package com.tally.luckydraw.domain.entity;
 
+import com.tally.luckydraw.domain.User;
 import com.tally.luckydraw.global.domain.base.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,4 +20,7 @@ public class UserEntity extends BaseTimeEntity {
     @Column(name = "USER_NAME", nullable = false)
     private String name;
 
+    public User toDomain() {
+        return User.of(id, name);
+    }
 }
