@@ -26,12 +26,12 @@ public class LuckyDrawPickerTest {
     void testProbabilityDistribution() {
         // Given
         List<RankProbability> probabilities = List.of(
-                RankProbability.of(0, 0),   // 꽝: 0%
-                RankProbability.of(1, 5),   // 1등: 5%
-                RankProbability.of(2, 10),  // 2등: 10%
-                RankProbability.of(3, 15),  // 3등: 15%
-                RankProbability.of(4, 20),  // 4등: 20%
-                RankProbability.of(5, 50)   // 5등: 50%
+                RankProbability.of(0, 0, null),   // 꽝: 0%
+                RankProbability.of(1, 5, 2L),   // 1등: 5%
+                RankProbability.of(2, 10, 3L),  // 2등: 10%
+                RankProbability.of(3, 15, 4L),  // 3등: 15%
+                RankProbability.of(4, 20, 5L),  // 4등: 20%
+                RankProbability.of(5, 50, 6L)   // 5등: 50%
         );
 
         // When

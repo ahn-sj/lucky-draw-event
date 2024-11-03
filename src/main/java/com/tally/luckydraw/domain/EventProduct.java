@@ -33,7 +33,7 @@ public class EventProduct {
 
     public static List<EventProduct> of(final List<EventProductEntity> eventProducts, final List<EventProductStockEntity> productStocks) {
         final Map<Long, EventProductStockEntity> productStockMap = productStocks.stream()
-                .collect(toMap(EventProductStockEntity::getEventProductId, eventProductStockEntity -> eventProductStockEntity));
+                .collect(toMap(stock -> stock.getEventProduct().getId(), eventProductStockEntity -> eventProductStockEntity));
 
         return eventProducts.stream()
                 .map(eventProduct -> EventProduct.of(eventProduct, productStockMap.get(eventProduct.getId())))

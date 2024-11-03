@@ -20,10 +20,18 @@ public class EventProductStockEntity extends BaseTimeEntity {
     @Column(name = "VERSION")
     private Long version;
 
-    @Column(name = "EVENT_PRODUCT_ID", nullable = false)
-    private Long eventProductId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EVENT_PRODUCT_ID", nullable = false)
+    private EventProductEntity eventProduct;
 
     @Column(name = "STOCK_QUANTITY", nullable = false)
     private int currentQuantity;
 
+    public boolean isSufficient() {
+        return currentQuantity <= eventProduct.getMaxQuantity();
+    }
+
+    public void increase() {
+        currentQuantity++;
+    }
 }

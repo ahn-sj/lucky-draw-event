@@ -8,4 +8,6 @@ public interface EventProductQueryRepository {
 
     List<EventProduct> getByEventId(Long eventId);
 
+    void checkStock(Long eventId);
+
 }

@@ -11,7 +11,7 @@ VALUES (1, 'product1', 'ACTIVE', NOW(), NOW()),
        (5, 'product5', 'ACTIVE', NOW(), NOW());
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_type`, `start_dt`, `end_dt`, `rank_probabilities`, `event_status`, `created_at`, `updated_at`)
-VALUES (1, 'event1', 'LUCKY_DRAW', '2024-10-01 00:00:00', '2024-11-10 00:00:00', '[{"rank": 0, "probability": 0}, {"rank": 1, "probability": 5}, {"rank": 2, "probability": 10}, {"rank": 3, "probability": 15}, {"rank": 4, "probability": 20}, {"rank": 5, "probability": 50}]', 'IN_PROGRESS', NOW(), NOW());
+VALUES (1, 'event1', 'LUCKY_DRAW', '2024-10-01 00:00:00', '2024-11-10 00:00:00', '[{"rank": 0, "probability": 0, "eventProductId": null}, {"rank": 1, "probability": 5, "eventProductId": 1}, {"rank": 2, "probability": 10, "eventProductId": 2}, {"rank": 3, "probability": 15, "eventProductId": 3}, {"rank": 4, "probability": 20, "eventProductId": 4}, {"rank": 5, "probability": 50, "eventProductId": 5}]', 'IN_PROGRESS', NOW(), NOW());
 
 INSERT INTO `event_products` (`event_product_id`, `event_product_name`, `max_quantity`, `product_id`, `event_id`, `created_at`, `updated_at`)
 VALUES (1, '(event) product1', 100, 1, 1, NOW(), NOW()),

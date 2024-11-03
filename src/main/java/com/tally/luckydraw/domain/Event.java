@@ -33,4 +33,12 @@ public class Event {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public Long getWinningProductId(final int rank) {
+        return rankProbabilities.stream()
+                .filter(rankProbability -> rankProbability.getRank() == rank)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Rank not found"))
+                .getEventProductId();
+    }
 }

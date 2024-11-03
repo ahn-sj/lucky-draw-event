@@ -24,7 +24,7 @@ public class LuckyDrawPicker {
         return drawRank(rankProbabilities, randomValue);
     }
 
-    public int drawRank(final List<RankProbability> rankProbabilities, final double randomValue) {
+    private int drawRank(final List<RankProbability> rankProbabilities, final double randomValue) {
         double cumulativeProbability = 0.0;
         for (RankProbability rankProbability : rankProbabilities) {
             cumulativeProbability += rankProbability.getProbability();
