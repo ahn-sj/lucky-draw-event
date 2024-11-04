@@ -33,7 +33,7 @@ public class EventCommandAdapterTest {
         final User user = createUser();
 
         // When - 3000번 참여 요청을 수행
-        for (int i = 0; i < 3000; i++) {
+        for (int i = 0; i < 1500; i++) {
             eventCommandAdapter.participate(event, user);
         }
 

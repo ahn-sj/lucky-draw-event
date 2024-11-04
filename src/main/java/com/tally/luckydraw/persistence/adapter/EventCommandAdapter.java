@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -42,46 +43,35 @@ public class EventCommandAdapter implements EventCommandRepository {
 
         final Long productId = event.getWinningProductId(rank);
 
-        // TODO: 참여 이력 저장
-
-        // 꽝은 제외
-        if(productId == null) { // to-me: 꽝은 상품으로 두어야 하나?
-            return;
-        }
-
         // 상품 재고 증가
-        final EventProductStockEntity stock = eventProductStockJpaRepository.findByProductId(productId)
-                .orElseThrow(() -> new RuntimeException("not found product"));
+        final EventProductStockEntity stock = getProductStock(productId);
         stock.increase();
 
         // 최대 수량 도달 시 상품 판매 종료 처리
-        if (!stock.isSufficient()) {
-            log.info("상품 판매 종료: {}", stock.getEventProduct().getId());
-            updateRankProbability(event, rank);
+        if (stock.isSufficient()) {
+            return;
         }
-    }
 
-    private void updateRankProbability(final Event event, final int rank) {
+        log.info("sold out - {}", productId);
+
         final EventEntity eventEntity = eventJpaRepository.findById(event.getEventId())
                 .orElseThrow(() -> new RuntimeException("Event not found"));
 
-        final List<RankProbability> probabilities = event.getRankProbabilities();
-        for (RankProbability probability : probabilities) {
-            final Long productId = event.getWinningProductId(rank);
-            if (probability.isMatch(productId)) {
-                probability.soldOut();
-            }
-        }
-
-        /**
-         * 아래 코드는 동시성 문제가 발생하는데 지금 적용되어 있는 코드는 발생 안함....?
-         *
-         * final List<RankProbability> probabilities = event.getRankProbabilities().stream()
-         *         .map(probability -> probability.getRank() == rank ? probability.with(0.0) : probability)
-         *         .collect(Collectors.toList());
-         */
+        final List<RankProbability> probabilities = event.getRankProbabilities()
+                .stream()
+                .map(probability -> probability.getRank() == rank
+                        ? probability.with(0.0)
+                        : probability
+                )
+                .toList();
         eventEntity.soleOut(probabilities);
+
         eventJpaRepository.save(eventEntity);
+    }
+
+    private EventProductStockEntity getProductStock(final Long productId) {
+        return eventProductStockJpaRepository.findByProductId(productId)
+                .orElseThrow(() -> new RuntimeException("not found product"));
     }
 
 }

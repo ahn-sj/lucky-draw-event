@@ -10,6 +10,7 @@ import com.tally.luckydraw.global.domain.vo.RankProbability;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -42,7 +43,7 @@ public class EventEntity extends BaseTimeEntity {
 
     @Convert(converter = RankProbabilityConverter.class)
     @Column(name = "RANK_PROBABILITIES", columnDefinition = "JSON")
-    private List<RankProbability> rankProbabilities;
+    private List<RankProbability> rankProbabilities = new ArrayList<>();
 
     protected EventEntity() {}
 
@@ -60,7 +61,7 @@ public class EventEntity extends BaseTimeEntity {
     }
 
     public void soleOut(final List<RankProbability> rankProbabilities) {
-        this.rankProbabilities = rankProbabilities;
+        this.rankProbabilities = new ArrayList<>(rankProbabilities);
     }
 
 }
